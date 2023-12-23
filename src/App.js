@@ -1,9 +1,10 @@
 import './App.css';
+import CustomerForm from './components/Customerform';
 
 function App() {
   return (
     <div className="App">
-      <h1>Customer Management System</h1>
+      <CustomerForm/>
     </div>
   );
 }
