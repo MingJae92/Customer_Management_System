@@ -1,14 +1,18 @@
-import express from "express"
-import dotenv from "dotenv"
+import express from "express";
+import dotenv from "dotenv";
 import { db_connection } from "./mongo_db_connection.js";
+import CustomerDataRoutes from "./routes/customer_route.js";
 
-dotenv.config({ path: '../config/.env' });
-const app = express()
-const port = process.env.SERVER_PORT || 5000
+dotenv.config({ path: '../config/.env' }); 
+const app = express();
+const port = process.env.SERVER_PORT || 5000;
 
-app.listen(()=>{
-    console.log(`Server connecting to ${port}`) 
-})
+// Use middleware before defining routes
+app.use("/customerdataapi", CustomerDataRoutes);
+
+app.listen(port, () => {
+    console.log(`Server connecting to ${port}`);
+});
 
 const db_url = process.env.MONGO_DB_URL;
 
