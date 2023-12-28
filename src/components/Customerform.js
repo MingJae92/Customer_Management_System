@@ -32,8 +32,10 @@ function CustomerForm() {
     try {
       const response = await axios.post(`${process.env.REACT_APP_URL}`, customerData)
       console.log(response.data)
+      console.log(process.env.REACT_APP_URL)
     } catch (error) {
       console.log("Error submitting form", error)
+      alert("Error submitting form!")
     }
    
   };
