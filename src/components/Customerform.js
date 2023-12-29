@@ -28,11 +28,13 @@ function CustomerForm() {
       phone:form.phone,
       address:form.address
     }
-
+const url = process.env.REACT_APP_URL
     try {
-      const response = await axios.post(`${process.env.REACT_APP_URL}`, customerData)
+
+      const response = await axios.post(`${url}/customerDetails`, customerData)
       console.log(response.data)
-      console.log(process.env.REACT_APP_URL)
+      console.log("API URL:", process.env.REACT_APP_URL);
+      alert("Details submitted!")
     } catch (error) {
       console.log("Error submitting form", error)
       alert("Error submitting form!")

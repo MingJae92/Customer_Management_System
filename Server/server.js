@@ -1,7 +1,7 @@
 // Import required modules and packages
 import express from "express";
 import dotenv from "dotenv";
-// import cors from "cors"
+import cors from "cors"; 
 import { db_connection } from "./mongo_db_connection.js";
 import CustomerRoutes from './routes/customer_route.js';
 
@@ -10,6 +10,9 @@ dotenv.config({ path: '../config/.env' });
 
 // Create an Express application
 const app = express();
+
+// Set up CORS middleware
+app.use(cors());
 
 // Set the port for the server to listen on, using the specified port or defaulting to 5000
 const port = process.env.SERVER_PORT || 5000;
