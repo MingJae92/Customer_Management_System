@@ -21,13 +21,13 @@ const port = process.env.SERVER_PORT || 5000;
 app.use(express.json());
 
 // Use the customerRoutes for requests to the /customerdataapi endpoint
-app.use("/customerdataapi", CustomerRoutes);
+// app.use("/customerdataapi", CustomerRoutes);
 
 // Start the server and listen on the specified port
 app.listen(port, () => {
     console.log(`Server connecting to ${port}`);
 });
-
+app.use("/customerdataapi", CustomerRoutes);
 // Get the MongoDB connection URL from environment variables
 const db_url = process.env.MONGO_DB_URL;
 

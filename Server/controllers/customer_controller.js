@@ -10,11 +10,16 @@ const createCustomer = async (req, res) => {
     // Create a new customer using the CustomerModel
     await CustomerModel.create({ name, email, phone, address });
 
+    // Log success message to the console
+    console.log("Customer details saved to DB!");
+
     // Respond with a success message
     return res.status(201).json({ message: "Customer details saved to DB!" });
   } catch (error) {
-    // Handle errors and respond with a server error message
+    // Log error message to the console
     console.error("Error creating customer:", error);
+
+    // Handle errors and respond with a server error message
     return res.status(500).json({ message: "Server error!" });
   }
 };
@@ -30,13 +35,21 @@ const getCustomerDetailsById = async (req, res) => {
 
     // Check if customer details are found and respond accordingly
     if (customerDetails) {
+      // Log success message to the console
+      console.log("Customer details found:", customerDetails);
+
       return res.status(200).json({ message: "Customer details found!", data: customerDetails });
     } else {
+      // Log not found message to the console
+      console.log("Customer details not found for ID:", customerDetailsId);
+
       return res.status(404).json({ message: "Customer details not found!" });
     }
   } catch (error) {
-    // Handle errors and respond with a server error message
+    // Log error message to the console
     console.error("Error getting customer details by ID:", error);
+
+    // Handle errors and respond with a server error message
     return res.status(500).json({ message: "Server error!" });
   }
 };
@@ -57,13 +70,21 @@ const updateCustomerDetailsById = async (req, res) => {
 
     // Check if customer details are updated and respond accordingly
     if (updatedCustomer) {
+      // Log success message to the console
+      console.log("Customer details updated:", updatedCustomer);
+
       return res.status(200).json({ message: "Customer details updated!", data: updatedCustomer });
     } else {
+      // Log not found message to the console
+      console.log("Customer details not found for ID:", customerDetailsId);
+
       return res.status(404).json({ message: "Customer details not found!" });
     }
   } catch (error) {
-    // Handle errors and respond with a server error message
+    // Log error message to the console
     console.error("Error updating customer details by ID:", error);
+
+    // Handle errors and respond with a server error message
     return res.status(500).json({ message: "Server error!" });
   }
 };
