@@ -1,6 +1,6 @@
 // Import the CustomerModel from the specified path
 import CustomerModel from '../models/customer_model.js';
-
+import mongoose from 'mongoose';
 // Controller function to create a new customer
 const createCustomer = async (req, res) => {
   try {
@@ -28,12 +28,19 @@ const createCustomer = async (req, res) => {
 const getCustomerDetailsById = async (req, res) => {
   try {
     // Extract customer ID from the request parameters
+
     const customerDetailsId = req.params.id;
+    
+    // Check if the ID is present
+    if (!customerDetailsId) {
+      console.log("Invalid customer ID provided in the URL parameters.");
+      return res.status(400).json({ message: "Invalid customer ID provided!" });
+    }
 
-    // Find customer details by ID using the CustomerModel
-    const customerDetails = await CustomerModel.findById(customerDetailsId);
+    // Find customer details by ID using a custom query
+    const customerDetails = await CustomerModel.findById({_id:customerDetailsId});
 
-    // Check if customer details are found and respond accordingly
+    // Check if customer details are found
     if (customerDetails) {
       // Log success message to the console
       console.log("Customer details found:", customerDetails);
@@ -48,11 +55,13 @@ const getCustomerDetailsById = async (req, res) => {
   } catch (error) {
     // Log error message to the console
     console.error("Error getting customer details by ID:", error);
-
+ 
     // Handle errors and respond with a server error message
     return res.status(500).json({ message: "Server error!" });
+    
   }
 };
+
 
 // Controller function to update customer details by ID
 const updateCustomerDetailsById = async (req, res) => {
@@ -86,6 +95,7 @@ const updateCustomerDetailsById = async (req, res) => {
 
     // Handle errors and respond with a server error message
     return res.status(500).json({ message: "Server error!" });
+    
   }
 };
 

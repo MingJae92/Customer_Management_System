@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
@@ -12,6 +12,11 @@ function CustomerForm() {
     phone: "",
     address: "",
   });
+
+  useEffect(() => {
+    // Fetch customer details when the component mounts
+    fetchCustomerDetails();
+  }, []); // Empty dependency array ensures it runs only once when the component mounts
 
   const handleChange = (e) => {
     setForm({
@@ -40,6 +45,18 @@ const url = process.env.REACT_APP_URL
       alert("Error submitting form!")
     }
    
+  };
+
+  const fetchCustomerDetails = async () => {
+    const url = process.env.REACT_APP_URL;
+
+    try {
+      const response = await axios.get(`${url}/customerDetails`);
+      // Assuming the response.data contains the customer details, update the form state
+      setForm(response.data);
+    } catch (error) {
+      console.log("Error fetching customer details", error);
+    }
   };
 
   return (

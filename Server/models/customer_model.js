@@ -26,6 +26,8 @@ const customerSchema = new Schema({
         type: String,
         required: true,
     },
+    
+    
 });
 
 // Creating a 'CustomerModel' based on the defined schema
