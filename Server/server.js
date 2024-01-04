@@ -4,7 +4,8 @@ import dotenv from "dotenv";
 import cors from "cors"; 
 import { db_connection } from "./mongo_db_connection.js";
 import PostCustomerDetails from './routes/customer_route.js';
-import GetCustomerDetails from './routes/customer_route.js'
+import GetCustomerDetails from './routes/customer_route.js';
+import PutCustomerDetails from './routes/customer_route.js'
 
 // Load environment variables from the specified file
 dotenv.config({ path: '../config/.env' }); 
@@ -29,6 +30,7 @@ app.listen(port, () => {
 // app.use("/customerdataapi", CustomerRoutes);
 app.use("/customerdataapi", PostCustomerDetails);
 app.use("/", GetCustomerDetails);
+app.use("/customerdataapi/updateCustomerDetails", PutCustomerDetails);
 
 // Get the MongoDB connection URL from environment variables
 const db_url = process.env.MONGO_DB_URL;

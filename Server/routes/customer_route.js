@@ -24,7 +24,7 @@ router.get(
 
 // Route for updating customer details by ID (PUT request)
 router.put(
-    "/customerDetails/:id",
+    "/customerDetails/updateCustomerDetails/:id",
     asyncMiddleware(customerController.updateCustomerDetailsById)
 );
 
